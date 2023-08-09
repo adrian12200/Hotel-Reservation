@@ -1,6 +1,7 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import MenuIcon from '@mui/icons-material/Menu';
 
 export const Top = () => {
     return (
@@ -18,10 +19,13 @@ export const Top = () => {
                 animate={{ opacity: 1, y: 0}}
                 transition={{ duration: 1}} 
             >
-                <Box fontSize={65} fontWeight={500} fontFamily="Satisfy" lineHeight={1.3} >
+                <Box fontSize={65} fontWeight={500} fontFamily="Satisfy" lineHeight={1.3} sx={{display:{xs:"none", sm:"block" }}} >
                     Casa Hotel
                 </Box>
-                <Box display="flex" justifyContent="space-between" width={700} fontSize={27}>
+                <Box fontSize={35} fontWeight={500} fontFamily="Satisfy" lineHeight={2.5} sx={{display:{xs:"block", sm:"none" }}} >
+                    Casa Hotel
+                </Box>
+                <Box justifyContent="space-between" width={700} fontSize={27} sx={{display:{xs:"none", sm:"flex" }}}>
                     <Box>
                         <Link to="/">
                             Home
@@ -37,6 +41,10 @@ export const Top = () => {
                             R
                         </Link>
                     </Box>
+                </Box>
+                <Box sx={{display:{xs:"flex", sm:"none"}, alignItems:"center", gap:"10px"}}>
+                    <Button sx={{color:'white', bgcolor:'#154c79'}}>Book now</Button>
+                    <MenuIcon sx={{fontSize:30}}/>
                 </Box>
             </Box>
         </Box>
