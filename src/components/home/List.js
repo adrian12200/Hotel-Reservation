@@ -14,11 +14,11 @@ export const List = ({ id, img, name, price, desc, addHandler}) => {
                 animate={{ opacity: 1, x: 0}}
                 transition={{ duration: 1}}
             >
-                <Card sx={{ maxWidth: 500 }}>
+                <Card sx={{ maxWidth: "auto"}}>
                     <CardActionArea>
                         <CardMedia
                         component="img"
-                        height="140"
+                        height="170"
                         image={img}
                         alt={name}
                         />
