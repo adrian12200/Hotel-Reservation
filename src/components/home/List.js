@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 
 export const List = ({ id, img, name, price, desc, addHandler}) => {
     return ( 
-        <Grid item xl={3} lg={6} md={6} xs={12}>
+        <Grid item xl={3} desktop={6} laptop={6} mobile={12}>
             <Box 
                 component={motion.div}
                 initial={{ opacity: 0, x: 150}}

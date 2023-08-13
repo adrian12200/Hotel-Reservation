@@ -10,16 +10,16 @@ export const Top = () => {
         justifyContent: "space-around"
     })
 
-    const Buttons = styled(Button)({
-        color: "white",
-        backgroundColor: "#154c79",
+    const Buttons = styled(Button)(({ theme }) => ({
+        color: theme.palette.secondary.light,
+        backgroundColor: theme.palette.primary.main,
         "&:hover": {
-            backgroundColor: "#154c50"
+            backgroundColor: theme.palette.primary.light,
         }
-    });
+    }));
 
     return (
-        <AppBar sx={{color: '#333', bgcolor: 'white', position: 'static'}}>
+        <AppBar sx={{backgroundColor:"transparent", position: 'fixed'}}>
             <StyledToolbar
                 component={motion.div}
                 initial={{ opacity: 0, y: -150}}
@@ -29,7 +29,7 @@ export const Top = () => {
                 <Typography fontFamily="Satisfy" fontSize={50}>
                     Casa Hotel
                 </Typography>
-                <Typography sx={{display:{xs:"none", sm:"none", md: "flex"}, justifyContent:"space-around", gap:"50px", alignItems: "center"}}>
+                <Typography sx={{display:{mobile:"none", tablet:"none", laptop: "flex"}, justifyContent:"space-around", gap:"50px", alignItems: "center"}}>
                     <Link to="/">
                         Home
                     </Link>
@@ -52,7 +52,7 @@ export const Top = () => {
                         <Buttons>Book Now</Buttons>
                     </Link>
                 </Typography>
-                <Box sx={{display:{sm:"flex", md: "none"}, alignItems:"center", gap:"10px"}}>
+                <Box sx={{display:{mobile:"flex", tablet: "none"}, alignItems:"center", gap:"10px"}}>
                     <Buttons>Book now</Buttons>
                     <MenuIcon/>
                 </Box> 
