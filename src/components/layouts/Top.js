@@ -1,89 +1,103 @@
-import { AppBar, Box, Button, styled, Toolbar, Typography } from "@mui/material";
+import { AppBar, Box, Button, Icon, styled, Toolbar, Typography } from "@mui/material";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 import MenuIcon from '@mui/icons-material/Menu';
+import { useState } from "react";
 
-export const Top = () => {
+export const Top = ({ homeComponent, aboutComponent, roomComponent }) => {
+    const [color,setColor] = useState(false)
+    const changeColor = () => {
+        if(window.scrollY >= 500){
+            setColor(true)
+        }else{
+            setColor(false)
+        }
+    }
+
+    window.addEventListener('scroll', changeColor)
 
     const StyledToolbar = styled(Toolbar)({
         display: "flex",
-        justifyContent: "space-around"
+        transition: ".5s ease",
+        alignItems: "center",
+        "&:hover": {
+            backgroundColor: "#f5f5f5",
+            color: "black",
+            transition: ".8s ease",
+        }
     })
+
+    const Menu = styled(Typography)(({ theme }) => ({
+        display: "none",
+        [theme.breakpoints.up("laptop")]:{
+            display: "flex",
+            marginRight: "auto",
+            justifyContent:"space-around", 
+            gap:"50px",
+            padding: "0 50px"
+        }
+    }));
+
+    const Icons = styled(Icon)(({ theme }) => ({
+        display: "none",
+        [theme.breakpoints.down("laptop")]:{
+            display: "flex",
+            marginRight: "auto",
+        }
+    }));
 
     const Buttons = styled(Button)(({ theme }) => ({
         color: theme.palette.secondary.light,
         backgroundColor: theme.palette.primary.main,
+        padding: "8px 12px",
         "&:hover": {
             backgroundColor: theme.palette.primary.light,
         }
     }));
 
+    const scrollToElement = (elmRef) => {
+        window.scrollTo({ top: elmRef.current.offsetTop - 50, behavior: 'smooth' });
+    };
+
     return (
-        <AppBar sx={{backgroundColor:"transparent", position: 'fixed'}}>
-            <StyledToolbar
-                component={motion.div}
-                initial={{ opacity: 0, y: -150}}
-                animate={{ opacity: 1, y: 0}}
-                transition={{ duration: 1}} 
-            >
-                <Typography fontFamily="Satisfy" fontSize={50}>
-                    Casa Hotel
-                </Typography>
-                <Typography sx={{display:{mobile:"none", tablet:"none", laptop: "flex"}, justifyContent:"space-around", gap:"50px", alignItems: "center"}}>
-                    <Link to="/">
+        <AppBar sx={{backgroundColor: color ? "white" : "transparent", color: color ? "black" : "white", position: 'fixed'}} 
+        component={motion.div}
+        initial={{ opacity: 0, y: -150}}
+        animate={{ opacity: 1, y: 0}}
+        transition={{ duration: .9}}>
+            <StyledToolbar>
+                <Menu>
+                    <Box onClick={() => scrollToElement(homeComponent)} sx={{cursor: "pointer"}}>
                         Home
-                    </Link>
-                    <Link to="/about">
+                    </Box>
+                    <Box onClick={() => scrollToElement(aboutComponent)} sx={{cursor: "pointer"}}>
                         About
-                    </Link>
+                    </Box>
                     <Link to="/reservations">
                         Reservations
                     </Link>
-                    <Link to="/">
+                    <Box onClick={() => scrollToElement(roomComponent)} sx={{cursor: "pointer"}}>
                         Rooms
-                    </Link>
+                    </Box>
                     <Link to="/">
                         Contact
                     </Link>
                     <Link to="/">
                         Location
                     </Link>
-                    <Link to="/">
-                        <Buttons>Book Now</Buttons>
-                    </Link>
-                </Typography>
-                <Box sx={{display:{mobile:"flex", tablet: "none"}, alignItems:"center", gap:"10px"}}>
-                    <Buttons>Book now</Buttons>
+                </Menu>
+                <Icons>
                     <MenuIcon/>
-                </Box> 
-                {/* <Box fontSize={65} fontWeight={500} fontFamily="Satisfy" lineHeight={1.3} sx={{display:{xs:"none", sm:"block" }}} >
-                    Casa Hotel
-                </Box>
-                <Box fontSize={35} fontWeight={500} fontFamily="Satisfy" lineHeight={2.5} sx={{display:{xs:"block", sm:"none" }}} >
-                    Casa Hotel
-                </Box>
-                <Box justifyContent="space-between" width={700} fontSize={27} sx={{display:{xs:"none", sm:"flex" }}}>
-                    <Box>
-                        <Link to="/">
-                            Home
-                        </Link>
-                    </Box>
-                    <Box>
-                        <Link to="/about">
-                            About
-                        </Link>
-                    </Box>
-                    <Box>
-                        <Link to="/reservations">
-                            Reservations
-                        </Link>
-                    </Box>
-                </Box>
-                <Box sx={{display:{xs:"flex", sm:"none"}, alignItems:"center", gap:"10px"}}>
-                    <Button sx={{color:'white', bgcolor:'#154c79'}}>Book now</Button>
-                    <MenuIcon sx={{fontSize:30}}/>
-                </Box> */}
+                </Icons>
+                <Buttons sx={{marginRight:{mobile:"0", laptop: "50px"}}}>
+                    Book now
+                </Buttons>
             </StyledToolbar>
         </AppBar>
     );
 }
+
+
+//mr="auto" sx={{display:{mobile:"none", tablet:"none", laptop: "flex"}, justifyContent:"space-around", gap:"50px", alignItems: "center"}}
+
+//sx={{display:{mobile:"flex", tablet: "none"}, alignItems:"center", marginRight: "auto"}}

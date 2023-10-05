@@ -58,7 +58,7 @@ export const Reservations = () => {
 
     return (  
         <Box p={3} alignItems="center">
-            <Box fontSize={25} mb={2}>Reservation List</Box>
+            <Box fontSize={25} mb={2} color={"#333"}>Reservation List</Box>
             <TableContainer component={Paper}>
                 <Table sx={{ minWidth: 650 }} aria-label="simple table">
                     <TableHead>

@@ -14,3 +14,19 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+/* .gallery-images{
+    display: flex;
+    border: 10px solid red;
+    justify-content: center;
+} */
+
+.gallery-images img{
+    width: 250px;
+    height: 150px;
+    padding: 5px;
+}
+
+.gallery-images .image-one{
+    grid-row: span 2 / span 2;
+}
